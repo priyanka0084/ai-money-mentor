@@ -16,7 +16,6 @@ const FileUpload = ({ onFileContent, isProcessing }: FileUploadProps) => {
     setFile({ name: f.name, size: f.size });
     setProgress(0);
 
-    // Simulate progress
     const progressInterval = setInterval(() => {
       setProgress(p => Math.min(p + 15, 90));
     }, 200);
@@ -74,12 +73,14 @@ const FileUpload = ({ onFileContent, isProcessing }: FileUploadProps) => {
             onDragOver={(e) => { e.preventDefault(); setDragActive(true); }}
             onDragLeave={() => setDragActive(false)}
             onDrop={handleDrop}
-            className={`glass-card flex flex-col items-center justify-center gap-3 p-8 cursor-pointer transition-all ${
-              dragActive ? "glow-primary border-primary" : "hover:border-primary/50"
+            className={`flex flex-col items-center justify-center gap-3 p-8 cursor-pointer transition-all rounded-2xl border-2 border-dashed ${
+              dragActive ? "border-primary bg-primary/5" : "border-primary/30 bg-primary/[0.02] hover:border-primary/50 hover:bg-primary/5"
             }`}
           >
             <motion.div animate={dragActive ? { scale: 1.1 } : { scale: 1 }}>
-              <Upload className="w-8 h-8 text-primary" />
+              <div className="p-3 rounded-xl bg-primary/10">
+                <Upload className="w-6 h-6 text-primary" />
+              </div>
             </motion.div>
             <div className="text-center">
               <p className="font-medium text-foreground">Drop your financial document here</p>
@@ -95,11 +96,11 @@ const FileUpload = ({ onFileContent, isProcessing }: FileUploadProps) => {
             className="glass-card p-4"
           >
             <div className="flex items-center gap-3">
-              <div className="p-2 rounded-lg bg-primary/10">
+              <div className="p-2 rounded-xl bg-primary/10">
                 <FileText className="w-5 h-5 text-primary" />
               </div>
               <div className="flex-1 min-w-0">
-                <p className="font-medium text-sm truncate">{file.name}</p>
+                <p className="font-medium text-sm truncate text-foreground">{file.name}</p>
                 <p className="text-xs text-muted-foreground">{(file.size / 1024).toFixed(1)} KB</p>
               </div>
               {progress === 100 && !isProcessing ? (
