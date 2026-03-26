@@ -23,7 +23,7 @@ const AgentPipeline = ({ activeStep, steps }: AgentPipelineProps) => {
       {pipelineSteps.map((step, i) => (
         <div key={i} className="flex items-center gap-2">
           <motion.div
-            className={`flex flex-col items-center gap-1 px-3 py-2 rounded-lg transition-all ${
+            className={`flex flex-col items-center gap-1 px-3 py-2 rounded-xl transition-all ${
               i <= activeStep
                 ? "glass-card glow-primary"
                 : "glass-card opacity-40"
@@ -46,7 +46,7 @@ const AgentPipeline = ({ activeStep, steps }: AgentPipelineProps) => {
           </motion.div>
           {i < pipelineSteps.length - 1 && (
             <motion.div
-              className={`h-0.5 w-6 rounded ${i < activeStep ? "bg-primary" : "bg-muted"}`}
+              className={`h-0.5 w-6 rounded ${i < activeStep ? "bg-primary" : "bg-border"}`}
               initial={{ scaleX: 0 }}
               animate={{ scaleX: 1 }}
               transition={{ delay: i * 0.15 + 0.1 }}
