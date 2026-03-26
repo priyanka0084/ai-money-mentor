@@ -27,25 +27,30 @@ cd ai-money-mentor
 npm install
 3. Run Application
 npm run dev
+
 🔐 API Key Setup
 Go to https://console.groq.com
 Generate API Key
 Enter key in Settings page
 Stored in localStorage as:
 groq_api_key
+
 📂 How It Works
 Upload financial document (PDF)
 PDF.js extracts text
 Groq API analyzes using AI agents
 JSON response parsed
 Data visualized via charts & insights
+
 ⚠️ Error Handling
 PDF parsing fails → demo data used
 API fails → retry + error message
 JSON parse fails → cleaned + retried
+
 📱 Responsive Design
 Mobile: single column
 Desktop: multi-column layout
+
 🧪 Demo Mode
 
 If no data available:
