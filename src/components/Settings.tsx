@@ -31,7 +31,7 @@ const Settings = () => {
   return (
     <div className="max-w-xl mx-auto space-y-6">
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-        <h2 className="text-xl font-bold font-display mb-2">Settings</h2>
+        <h2 className="text-xl font-bold font-display mb-2 text-foreground">Settings</h2>
         <p className="text-sm text-muted-foreground">Configure your AI connection for live analysis.</p>
       </motion.div>
 
@@ -42,11 +42,11 @@ const Settings = () => {
         transition={{ delay: 0.1 }}
       >
         <div className="flex items-center gap-3">
-          <div className="p-2 rounded-lg bg-primary/10">
+          <div className="p-2 rounded-xl bg-primary/10">
             <Key className="w-5 h-5 text-primary" />
           </div>
           <div>
-            <h3 className="font-semibold text-sm">Groq API Key</h3>
+            <h3 className="font-semibold text-sm text-foreground">Groq API Key</h3>
             <p className="text-xs text-muted-foreground">Used for LLaMA 3.3 70B analysis</p>
           </div>
           <div className="ml-auto flex items-center gap-2">
@@ -68,14 +68,14 @@ const Settings = () => {
             value={key}
             onChange={(e) => setKey(e.target.value)}
             placeholder="gsk_..."
-            className="w-full px-4 py-2.5 rounded-lg bg-muted border border-border text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
+            className="w-full px-4 py-2.5 rounded-xl bg-muted border border-border text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 transition-all"
           />
         </div>
 
         <div className="flex gap-3">
           <motion.button
             onClick={handleSave}
-            className="gradient-btn px-4 py-2 rounded-lg text-sm font-medium flex items-center gap-2"
+            className="gradient-btn px-4 py-2 rounded-xl text-sm font-medium flex items-center gap-2"
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
           >
@@ -84,7 +84,7 @@ const Settings = () => {
           {status === "connected" && (
             <motion.button
               onClick={handleRemove}
-              className="px-4 py-2 rounded-lg text-sm font-medium border border-destructive/30 text-destructive hover:bg-destructive/10 flex items-center gap-2 transition-all"
+              className="px-4 py-2 rounded-xl text-sm font-medium border border-destructive/30 text-destructive hover:bg-destructive/10 flex items-center gap-2 transition-all"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
             >
@@ -100,7 +100,7 @@ const Settings = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2 }}
       >
-        <h3 className="font-semibold text-sm mb-3">About AI Money Mentor Pro</h3>
+        <h3 className="font-semibold text-sm mb-3 text-foreground">About AI Money Mentor Pro</h3>
         <p className="text-xs text-muted-foreground leading-relaxed">
           AI Money Mentor Pro uses advanced AI models to analyze your financial documents and provide actionable insights.
           Upload tax documents or portfolio statements to get personalized recommendations for tax savings,

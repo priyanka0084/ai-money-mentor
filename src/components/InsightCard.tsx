@@ -32,8 +32,8 @@ const InsightCard = ({ type, text, impact, index = 0 }: InsightCardProps) => {
       initial={{ opacity: 0, x: -20 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ delay: index * 0.1, duration: 0.4 }}
-      whileHover={{ scale: 1.02, x: 4 }}
-      className={`flex items-start gap-3 p-3 rounded-lg border ${colorMap[type]} transition-all`}
+      whileHover={{ scale: 1.01, x: 4 }}
+      className={`flex items-start gap-3 p-4 rounded-xl border ${colorMap[type]} transition-all`}
     >
       <Icon className="w-4 h-4 mt-0.5 shrink-0" />
       <div className="flex-1 min-w-0">

@@ -6,59 +6,59 @@
 
 @layer base {
   :root {
-    --background: 222 47% 6%;
-    --foreground: 210 40% 96%;
+    --background: 220 20% 97%;
+    --foreground: 224 30% 15%;
 
-    --card: 222 47% 9%;
-    --card-foreground: 210 40% 96%;
+    --card: 0 0% 100%;
+    --card-foreground: 224 30% 15%;
 
-    --popover: 222 47% 9%;
-    --popover-foreground: 210 40% 96%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 224 30% 15%;
 
     --primary: 225 73% 57%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 222 47% 14%;
-    --secondary-foreground: 210 40% 90%;
+    --secondary: 240 5% 96%;
+    --secondary-foreground: 224 30% 25%;
 
-    --muted: 222 30% 16%;
-    --muted-foreground: 215 20% 55%;
+    --muted: 220 14% 94%;
+    --muted-foreground: 220 10% 46%;
 
-    --accent: 187 92% 55%;
-    --accent-foreground: 222 47% 6%;
+    --accent: 187 92% 40%;
+    --accent-foreground: 0 0% 100%;
 
-    --destructive: 0 72% 51%;
+    --destructive: 0 72% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 222 30% 18%;
-    --input: 222 30% 18%;
+    --border: 220 14% 90%;
+    --input: 220 14% 90%;
     --ring: 225 73% 57%;
 
     --radius: 0.75rem;
 
     /* Custom tokens */
     --gradient-primary: linear-gradient(135deg, hsl(225, 73%, 57%), hsl(245, 58%, 51%));
-    --gradient-accent: linear-gradient(135deg, hsl(187, 92%, 55%), hsl(225, 73%, 57%));
-    --gradient-bg: linear-gradient(160deg, hsl(222, 47%, 6%) 0%, hsl(230, 40%, 10%) 50%, hsl(222, 47%, 6%) 100%);
-    --glass-bg: hsla(222, 47%, 11%, 0.6);
-    --glass-border: hsla(222, 30%, 25%, 0.4);
-    --glow-primary: 0 0 30px hsla(225, 73%, 57%, 0.3);
-    --glow-accent: 0 0 30px hsla(187, 92%, 55%, 0.2);
-    --shadow-card: 0 8px 32px hsla(0, 0%, 0%, 0.3);
+    --gradient-accent: linear-gradient(135deg, hsl(225, 73%, 57%), hsl(245, 58%, 51%));
+    --gradient-hero: linear-gradient(135deg, hsl(220, 60%, 95%), hsl(0, 0%, 100%), hsl(240, 60%, 95%));
+    --glass-bg: hsla(0, 0%, 100%, 0.8);
+    --glass-border: hsla(220, 14%, 86%, 0.6);
+    --glow-primary: 0 0 30px hsla(225, 73%, 57%, 0.15);
+    --glow-accent: 0 0 30px hsla(187, 92%, 55%, 0.1);
+    --shadow-card: 0 4px 24px hsla(220, 30%, 40%, 0.08);
 
-    --sidebar-background: 222 47% 8%;
-    --sidebar-foreground: 210 40% 90%;
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 224 30% 15%;
     --sidebar-primary: 225 73% 57%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 222 47% 14%;
-    --sidebar-accent-foreground: 210 40% 90%;
-    --sidebar-border: 222 30% 18%;
+    --sidebar-accent: 220 14% 96%;
+    --sidebar-accent-foreground: 224 30% 25%;
+    --sidebar-border: 220 14% 90%;
     --sidebar-ring: 225 73% 57%;
 
     /* Score colors */
     --score-excellent: 142 71% 45%;
-    --score-good: 48 96% 53%;
-    --score-poor: 0 72% 51%;
+    --score-good: 48 96% 48%;
+    --score-poor: 0 72% 60%;
   }
 }
 
@@ -69,7 +69,7 @@
   body {
     @apply bg-background text-foreground;
     font-family: 'Inter', system-ui, sans-serif;
-    background: var(--gradient-bg);
+    background: linear-gradient(160deg, hsl(220, 20%, 97%) 0%, hsl(225, 30%, 95%) 50%, hsl(220, 20%, 97%) 100%);
     min-height: 100vh;
   }
   h1, h2, h3, h4, h5, h6 {
@@ -83,7 +83,7 @@
     border: 1px solid var(--glass-border);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    border-radius: var(--radius);
+    border-radius: 1rem;
     box-shadow: var(--shadow-card);
   }
   .gradient-text {
@@ -105,8 +105,9 @@
     transition: all 0.3s ease;
   }
   .gradient-btn:hover {
-    filter: brightness(1.15);
+    filter: brightness(1.1);
     transform: translateY(-1px);
+    box-shadow: 0 4px 20px hsla(225, 73%, 57%, 0.3);
   }
   .progress-glow {
     box-shadow: 0 0 10px currentColor;
@@ -132,7 +133,7 @@
   background: hsl(var(--background));
 }
 ::-webkit-scrollbar-thumb {
-  background: hsl(var(--muted));
+  background: hsl(var(--border));
   border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {

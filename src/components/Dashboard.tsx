@@ -7,14 +7,12 @@ import AgentPipeline from "./AgentPipeline";
 import { dashboardInsights, demoTaxData, demoPortfolioData } from "@/lib/demoData";
 
 const allocationData = Object.entries(demoPortfolioData.allocation).map(([name, value]) => ({ name, value }));
-const COLORS = ["hsl(225, 73%, 57%)", "hsl(187, 92%, 55%)", "hsl(142, 71%, 45%)", "hsl(48, 96%, 53%)", "hsl(280, 67%, 60%)", "hsl(0, 72%, 51%)"];
+const COLORS = ["hsl(225, 73%, 57%)", "hsl(187, 80%, 45%)", "hsl(142, 71%, 45%)", "hsl(48, 96%, 48%)", "hsl(280, 60%, 55%)", "hsl(0, 72%, 60%)"];
 
 const taxCompare = [
   { regime: "Old", tax: demoTaxData.taxOldRegime },
   { regime: "New", tax: demoTaxData.taxNewRegime },
 ];
-
-const floatingIcons = ["💰", "📊", "🏦", "💎", "📈", "🪙"];
 
 const Dashboard = () => {
   return (
@@ -22,23 +20,15 @@ const Dashboard = () => {
       {/* Hero */}
       <motion.div
         className="relative overflow-hidden rounded-2xl p-8 md:p-12"
-        style={{ background: "linear-gradient(135deg, hsl(225, 73%, 20%), hsl(245, 58%, 18%), hsl(225, 73%, 12%))" }}
+        style={{ background: "var(--gradient-hero)" }}
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
       >
-        {/* Floating icons */}
-        {floatingIcons.map((icon, i) => (
-          <motion.span
-            key={i}
-            className="absolute text-2xl opacity-20 select-none"
-            style={{ left: `${15 + i * 14}%`, top: `${20 + (i % 3) * 25}%` }}
-            animate={{ y: [0, -15, 0], rotate: [0, 10, -10, 0] }}
-            transition={{ repeat: Infinity, duration: 3 + i * 0.5, delay: i * 0.3 }}
-          >
-            {icon}
-          </motion.span>
-        ))}
+        {/* Floating blur shapes */}
+        <div className="absolute top-10 left-10 w-32 h-32 rounded-full bg-primary/10 blur-3xl" />
+        <div className="absolute bottom-10 right-20 w-40 h-40 rounded-full bg-accent/10 blur-3xl" />
+        <div className="absolute top-20 right-40 w-24 h-24 rounded-full bg-score-good/10 blur-3xl" />
 
         <div className="relative z-10">
           <motion.h1
@@ -50,7 +40,7 @@ const Dashboard = () => {
             Your AI Financial Brain
           </motion.h1>
           <motion.p
-            className="mt-3 text-lg text-secondary-foreground/70"
+            className="mt-3 text-lg text-muted-foreground"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.4 }}
@@ -64,23 +54,25 @@ const Dashboard = () => {
             transition={{ delay: 0.6 }}
           >
             {[
-              { icon: TrendingUp, label: "Portfolio", value: "₹24.5L" },
-              { icon: Shield, label: "Tax Saved", value: "₹38.5K" },
-              { icon: Brain, label: "AI Score", value: "62/100" },
-              { icon: Zap, label: "Insights", value: "8 New" },
+              { icon: TrendingUp, label: "Portfolio", value: "₹24.5L", color: "bg-primary/10 text-primary" },
+              { icon: Shield, label: "Tax Saved", value: "₹38.5K", color: "bg-score-excellent/10 text-score-excellent" },
+              { icon: Brain, label: "AI Score", value: "62/100", color: "bg-accent/10 text-accent" },
+              { icon: Zap, label: "Insights", value: "8 New", color: "bg-score-good/10 text-score-good" },
             ].map((stat, i) => (
               <motion.div
                 key={stat.label}
-                className="glass-card px-4 py-3 flex items-center gap-3"
+                className="glass-card px-5 py-3 flex items-center gap-3"
                 whileHover={{ scale: 1.05, y: -2 }}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.7 + i * 0.1 }}
               >
-                <stat.icon className="w-4 h-4 text-accent" />
+                <div className={`p-2 rounded-xl ${stat.color}`}>
+                  <stat.icon className="w-4 h-4" />
+                </div>
                 <div>
                   <p className="text-xs text-muted-foreground">{stat.label}</p>
-                  <p className="font-semibold font-display text-sm">{stat.value}</p>
+                  <p className="font-semibold font-display text-sm text-foreground">{stat.value}</p>
                 </div>
               </motion.div>
             ))}
@@ -94,7 +86,7 @@ const Dashboard = () => {
         animate={{ opacity: 1 }}
         transition={{ delay: 0.4 }}
       >
-        <h2 className="text-lg font-semibold font-display mb-4 flex items-center gap-2">
+        <h2 className="text-lg font-semibold font-display mb-4 flex items-center gap-2 text-foreground">
           <Brain className="w-5 h-5 text-primary" />
           AI-Powered Alerts
         </h2>
@@ -113,17 +105,17 @@ const Dashboard = () => {
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.5 }}
         >
-          <h3 className="text-sm font-semibold font-display mb-4">Tax Comparison</h3>
+          <h3 className="text-sm font-semibold font-display mb-4 text-foreground">Tax Comparison</h3>
           <ResponsiveContainer width="100%" height={180}>
             <BarChart data={taxCompare}>
               <XAxis dataKey="regime" stroke="hsl(var(--muted-foreground))" fontSize={12} />
               <YAxis stroke="hsl(var(--muted-foreground))" fontSize={12} tickFormatter={v => `₹${(v/1000).toFixed(0)}K`} />
               <Tooltip
-                contentStyle={{ background: "hsl(var(--card))", border: "1px solid hsl(var(--border))", borderRadius: 8 }}
+                contentStyle={{ background: "hsl(var(--card))", border: "1px solid hsl(var(--border))", borderRadius: 12 }}
                 labelStyle={{ color: "hsl(var(--foreground))" }}
                 formatter={(v: number) => [`₹${v.toLocaleString("en-IN")}`, "Tax"]}
               />
-              <Bar dataKey="tax" radius={[6, 6, 0, 0]} fill="url(#barGradient)" />
+              <Bar dataKey="tax" radius={[8, 8, 0, 0]} fill="url(#barGradient)" />
               <defs>
                 <linearGradient id="barGradient" x1="0" y1="0" x2="0" y2="1">
                   <stop offset="0%" stopColor="hsl(225, 73%, 57%)" />
@@ -143,7 +135,7 @@ const Dashboard = () => {
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.6 }}
         >
-          <h3 className="text-sm font-semibold font-display mb-4">Portfolio Allocation</h3>
+          <h3 className="text-sm font-semibold font-display mb-4 text-foreground">Portfolio Allocation</h3>
           <ResponsiveContainer width="100%" height={180}>
             <PieChart>
               <Pie
@@ -160,14 +152,14 @@ const Dashboard = () => {
                 ))}
               </Pie>
               <Tooltip
-                contentStyle={{ background: "hsl(var(--card))", border: "1px solid hsl(var(--border))", borderRadius: 8 }}
+                contentStyle={{ background: "hsl(var(--card))", border: "1px solid hsl(var(--border))", borderRadius: 12 }}
                 formatter={(v: number) => [`${v}%`, "Allocation"]}
               />
             </PieChart>
           </ResponsiveContainer>
           <div className="flex flex-wrap gap-2 mt-2">
             {allocationData.map((d, i) => (
-              <span key={d.name} className="text-[10px] flex items-center gap-1">
+              <span key={d.name} className="text-[10px] flex items-center gap-1 text-muted-foreground">
                 <span className="w-2 h-2 rounded-full" style={{ background: COLORS[i] }} />
                 {d.name}
               </span>
@@ -183,7 +175,7 @@ const Dashboard = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.7 }}
       >
-        <h3 className="text-sm font-semibold font-display mb-4">🤖 AI Agent Pipeline</h3>
+        <h3 className="text-sm font-semibold font-display mb-4 text-foreground">🤖 AI Agent Pipeline</h3>
         <AgentPipeline activeStep={4} />
       </motion.div>
     </div>
