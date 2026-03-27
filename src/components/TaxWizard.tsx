@@ -7,7 +7,7 @@ import AnimatedCounter from "./AnimatedCounter";
 import FileUpload from "./FileUpload";
 import AgentPipeline from "./AgentPipeline";
 import { demoTaxData } from "@/lib/demoData";
-import { analyzeTaxDocument, getApiKey } from "@/lib/groq";
+import { analyzeTaxDocument, getApiKey, extractJSON } from "@/lib/groq";
 import { ArrowRight } from "lucide-react";
 
 const TaxWizard = () => {

@@ -9,7 +9,7 @@ import InsightCard from "./InsightCard";
 import FileUpload from "./FileUpload";
 import AgentPipeline from "./AgentPipeline";
 import { demoPortfolioData } from "@/lib/demoData";
-import { analyzePortfolio, getApiKey } from "@/lib/groq";
+import { analyzePortfolio, getApiKey, extractJSON } from "@/lib/groq";
 import AnimatedCounter from "./AnimatedCounter";
 
 const COLORS = ["hsl(225, 73%, 57%)", "hsl(187, 92%, 55%)", "hsl(142, 71%, 45%)", "hsl(48, 96%, 53%)", "hsl(280, 67%, 60%)", "hsl(0, 72%, 51%)"];

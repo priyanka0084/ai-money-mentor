@@ -5,7 +5,7 @@ import { Heart, ArrowRight, Users } from "lucide-react";
 import AnimatedCounter from "./AnimatedCounter";
 import InsightCard from "./InsightCard";
 import { demoCoupleData } from "@/lib/demoData";
-import { analyzeCouplePlan, getApiKey } from "@/lib/groq";
+import { analyzeCouplePlan, getApiKey, extractJSON } from "@/lib/groq";
 
 const CouplePlanner = () => {
   const [data, setData] = useState(demoCoupleData);
