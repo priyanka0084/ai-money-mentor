@@ -6,7 +6,7 @@ import ScoreGauge from "./ScoreGauge";
 import AnimatedCounter from "./AnimatedCounter";
 import InsightCard from "./InsightCard";
 import { demoFireData } from "@/lib/demoData";
-import { analyzeFirePlan, getApiKey } from "@/lib/groq";
+import { analyzeFirePlan, getApiKey, extractJSON } from "@/lib/groq";
 
 const FirePlanner = () => {
   const [data, setData] = useState(demoFireData);
