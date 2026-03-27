@@ -24,8 +24,8 @@ const FileUpload = ({ onFileContent, isProcessing }: FileUploadProps) => {
       if (f.type === "application/pdf") {
         const arrayBuffer = await f.arrayBuffer();
         const pdfjsLib = await import("pdfjs-dist");
-        pdfjsLib.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.js`;
-        const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+        pdfjsLib.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.mjs`;
+        const pdf = await pdfjsLib.getDocument({ data: new Uint8Array(arrayBuffer) }).promise;
         let text = "";
         for (let i = 1; i <= pdf.numPages; i++) {
           const page = await pdf.getPage(i);
