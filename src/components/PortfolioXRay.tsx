@@ -29,7 +29,30 @@ const PortfolioXRay = () => {
       const result = await analyzePortfolio(text);
       intervals.forEach(clearTimeout);
       setAgentStep(4);
-      setData(JSON.parse(extractJSON(result)));
+      const parsed = JSON.parse(extractJSON(result));
+
+const safeData = {
+  ...parsed,
+  totalValue: parsed.totalValue || 0,
+  healthScore: parsed.healthScore || 0,
+  returns: {
+    oneYear: parsed.returns?.oneYear || 0,
+    threeYear: parsed.returns?.threeYear || 0,
+  },
+  allocation: parsed.allocation || {},
+  riskRadar: parsed.riskRadar || {},
+  rebalanced: parsed.rebalanced || {},
+  funds: (parsed.funds || []).map((f: any) => ({
+    ...f,
+    value: f.value || 0,
+    allocation: f.allocation || 0,
+    expenseRatio: f.expenseRatio || 0,
+    returns1Y: f.returns1Y || 0,
+  })),
+  insights: parsed.insights || []
+};
+
+setData(safeData);
       setIsDemo(false);
     } catch { setIsDemo(true); }
     finally { setProcessing(false); }
