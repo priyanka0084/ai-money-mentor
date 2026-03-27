@@ -7,7 +7,7 @@ import AnimatedCounter from "./AnimatedCounter";
 import FileUpload from "./FileUpload";
 import AgentPipeline from "./AgentPipeline";
 import { demoTaxData } from "@/lib/demoData";
-import { analyzeTaxDocument, getApiKey } from "@/lib/groq";
+import { analyzeTaxDocument, getApiKey, extractJSON } from "@/lib/groq";
 import { ArrowRight } from "lucide-react";
 
 const TaxWizard = () => {
@@ -30,7 +30,7 @@ const TaxWizard = () => {
       const result = await analyzeTaxDocument(text);
       intervals.forEach(clearTimeout);
       setAgentStep(4);
-      const parsed = JSON.parse(result);
+      const parsed = JSON.parse(extractJSON(result));
       setData(parsed);
       setIsDemo(false);
     } catch {

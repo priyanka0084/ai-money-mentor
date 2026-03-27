@@ -5,7 +5,7 @@ import { Heart, ArrowRight, AlertTriangle, CheckCircle2 } from "lucide-react";
 import ScoreGauge from "./ScoreGauge";
 import InsightCard from "./InsightCard";
 import { demoHealthScoreData } from "@/lib/demoData";
-import { analyzeHealthScore, getApiKey } from "@/lib/groq";
+import { analyzeHealthScore, getApiKey, extractJSON } from "@/lib/groq";
 
 const HealthScore = () => {
   const [data, setData] = useState(demoHealthScoreData);
@@ -27,7 +27,7 @@ const HealthScore = () => {
     setProcessing(true);
     try {
       const result = await analyzeHealthScore(form);
-      setData(JSON.parse(result));
+      setData(JSON.parse(extractJSON(result)));
       setIsDemo(false);
     } catch {
       setIsDemo(true);

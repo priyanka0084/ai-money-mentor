@@ -5,7 +5,7 @@ import { Sparkles, ArrowRight } from "lucide-react";
 import InsightCard from "./InsightCard";
 import AnimatedCounter from "./AnimatedCounter";
 import { demoLifeEventData } from "@/lib/demoData";
-import { analyzeLifeEvent, getApiKey } from "@/lib/groq";
+import { analyzeLifeEvent, getApiKey, extractJSON } from "@/lib/groq";
 
 const EVENTS = ["Bonus", "Marriage", "New Baby", "Inheritance", "Job Switch"];
 const RISK_PROFILES = ["Conservative", "Moderate", "Aggressive"];
@@ -27,7 +27,7 @@ const LifeEvents = () => {
     setProcessing(true);
     try {
       const result = await analyzeLifeEvent(form);
-      setData(JSON.parse(result));
+      setData(JSON.parse(extractJSON(result)));
       setIsDemo(false);
     } catch {
       setIsDemo(true);

@@ -6,7 +6,7 @@ import ScoreGauge from "./ScoreGauge";
 import AnimatedCounter from "./AnimatedCounter";
 import InsightCard from "./InsightCard";
 import { demoFireData } from "@/lib/demoData";
-import { analyzeFirePlan, getApiKey } from "@/lib/groq";
+import { analyzeFirePlan, getApiKey, extractJSON } from "@/lib/groq";
 
 const FirePlanner = () => {
   const [data, setData] = useState(demoFireData);
@@ -33,7 +33,7 @@ const FirePlanner = () => {
     setProcessing(true);
     try {
       const result = await analyzeFirePlan(form);
-      const parsed = JSON.parse(result);
+      const parsed = JSON.parse(extractJSON(result));
       setData(parsed);
       setIsDemo(false);
     } catch {

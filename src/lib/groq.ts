@@ -47,6 +47,16 @@ export async function callGroq(prompt: string, systemPrompt?: string): Promise<s
   return data.choices[0]?.message?.content || "";
 }
 
+export function extractJSON(text: string): string {
+  // Strip markdown code fences like ```json ... ``` or ``` ... ```
+  const fenceMatch = text.match(/```(?:json)?\s*([\s\S]*?)```/);
+  if (fenceMatch) return fenceMatch[1].trim();
+  // Try to find raw JSON object/array
+  const jsonMatch = text.match(/(\{[\s\S]*\}|\[[\s\S]*\])/);
+  if (jsonMatch) return jsonMatch[1].trim();
+  return text.trim();
+}
+
 export async function analyzeTaxDocument(text: string): Promise<string> {
   const prompt = `Analyze this financial document and extract tax-relevant information. Return a JSON object with these fields:
 {
