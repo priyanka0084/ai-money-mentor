@@ -14,11 +14,11 @@ const AnimatedCounter = ({ value, prefix = "", suffix = "", duration = 1.5, clas
   const [count, setCount] = useState(0);
   const ref = useRef<HTMLSpanElement>(null);
   const isInView = useInView(ref, { once: true });
-
+  const safeValue = Number(value ?? 0);
   useEffect(() => {
     if (!isInView) return;
     let start = 0;
-    const end = value;
+    const end = safeValue;
     const stepTime = (duration * 1000) / 60;
     const increment = end / 60;
 
@@ -35,9 +35,11 @@ const AnimatedCounter = ({ value, prefix = "", suffix = "", duration = 1.5, clas
     return () => clearInterval(timer);
   }, [isInView, value, duration]);
 
-  const formatted = decimals > 0
-    ? count.toFixed(decimals)
-    : Math.floor(count).toLocaleString("en-IN");
+  const safeCount = Number(count ?? 0);
+
+const formatted = decimals > 0
+  ? safeCount.toFixed(decimals)
+  : Math.floor(safeCount).toLocaleString("en-IN");
 
   return (
     <motion.span
