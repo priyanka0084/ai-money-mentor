@@ -27,7 +27,7 @@ const HealthScore = () => {
     setProcessing(true);
     try {
       const result = await analyzeHealthScore(form);
-      setData(JSON.parse(result));
+      setData(JSON.parse(extractJSON(result)));
       setIsDemo(false);
     } catch {
       setIsDemo(true);

@@ -29,7 +29,7 @@ const PortfolioXRay = () => {
       const result = await analyzePortfolio(text);
       intervals.forEach(clearTimeout);
       setAgentStep(4);
-      setData(JSON.parse(result));
+      setData(JSON.parse(extractJSON(result)));
       setIsDemo(false);
     } catch { setIsDemo(true); }
     finally { setProcessing(false); }

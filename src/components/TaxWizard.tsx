@@ -30,7 +30,7 @@ const TaxWizard = () => {
       const result = await analyzeTaxDocument(text);
       intervals.forEach(clearTimeout);
       setAgentStep(4);
-      const parsed = JSON.parse(result);
+      const parsed = JSON.parse(extractJSON(result));
       setData(parsed);
       setIsDemo(false);
     } catch {

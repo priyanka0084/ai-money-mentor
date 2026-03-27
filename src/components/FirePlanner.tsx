@@ -33,7 +33,7 @@ const FirePlanner = () => {
     setProcessing(true);
     try {
       const result = await analyzeFirePlan(form);
-      const parsed = JSON.parse(result);
+      const parsed = JSON.parse(extractJSON(result));
       setData(parsed);
       setIsDemo(false);
     } catch {

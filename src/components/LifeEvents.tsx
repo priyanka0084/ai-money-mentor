@@ -27,7 +27,7 @@ const LifeEvents = () => {
     setProcessing(true);
     try {
       const result = await analyzeLifeEvent(form);
-      setData(JSON.parse(result));
+      setData(JSON.parse(extractJSON(result)));
       setIsDemo(false);
     } catch {
       setIsDemo(true);
