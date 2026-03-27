@@ -22,23 +22,25 @@ const FileUpload = ({ onFileContent, isProcessing }: FileUploadProps) => {
 
     try {
       if (f.type === "application/pdf") {
-  const arrayBuffer = await f.arrayBuffer();
-  const pdfjsLib = await import("pdfjs-dist");
-  
-  // Use unpkg instead of cdnjs - it's more reliable
-  pdfjsLib.GlobalWorkerOptions.workerSrc = `https://unpkg.com/pdfjs-dist@${pdfjsLib.version}/build/pdf.worker.min.js`;
-  
-  const pdf = await pdfjsLib.getDocument({ data: new Uint8Array(arrayBuffer) }).promise;
-  let text = "";
-  for (let i = 1; i <= pdf.numPages; i++) {
-    const page = await pdf.getPage(i);
-    const content = await page.getTextContent();
-    text += content.items.map((item: any) => item.str).join(" ") + "\n";
-  }
-  clearInterval(progressInterval);
-  setProgress(100);
-  onFileContent(text, f.name);
-}else {
+        const arrayBuffer = await f.arrayBuffer();
+        const pdfjsLib = await import("pdfjs-dist");
+        
+        // Use blob URL to avoid CORS - create worker from imported module
+        pdfjsLib.GlobalWorkerOptions.workerSrc = await import("pdfjs-dist/build/pdf.worker.min.mjs?url").then(
+          (workerModule) => workerModule.default
+        );
+        
+        const pdf = await pdfjsLib.getDocument({ data: new Uint8Array(arrayBuffer) }).promise;
+        let text = "";
+        for (let i = 1; i <= pdf.numPages; i++) {
+          const page = await pdf.getPage(i);
+          const content = await page.getTextContent();
+          text += content.items.map((item: any) => item.str).join(" ") + "\n";
+        }
+        clearInterval(progressInterval);
+        setProgress(100);
+        onFileContent(text, f.name);
+      } else {
         const text = await f.text();
         clearInterval(progressInterval);
         setProgress(100);
